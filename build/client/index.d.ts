@@ -37,3 +37,4 @@ export declare function createServiceWriter({ port, host, protocol, path, space,
     subProcess: ChildProcessWithoutNullStreams;
 }>;
 export { LoggerReaderClient, LoggerWriterClient };
+//# sourceMappingURL=index.d.ts.map

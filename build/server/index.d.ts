@@ -4,3 +4,4 @@ export declare function createCluster(clusterInfo: any, serversInfo: any[] | und
 }, guard?: Guard): LoggerCluster;
 export declare function createServer(): undefined;
 export { LoggerCluster };
+//# sourceMappingURL=index.d.ts.map

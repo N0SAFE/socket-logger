@@ -49,3 +49,4 @@ export default class Cluster<GlobalStore, ServerStore> extends Server {
     }) => void, onServerError?: (error: Error, store: ServerStore) => void): void;
 }
 export {};
+//# sourceMappingURL=Cluster.d.ts.map

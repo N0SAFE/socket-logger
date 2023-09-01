@@ -16,6 +16,7 @@
     "resolveJsonModule": true,
     "preserveConstEnums": true,
     "sourceMap": true,
+    "declarationMap": true,
     "declaration": true,
     "strict": true,
     "exactOptionalPropertyTypes": true,

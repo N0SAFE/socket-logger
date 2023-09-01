@@ -18,3 +18,4 @@ export default class Server extends _Server implements AdvancedSocketMethods {
     connect(): Client;
     static createHttpServer(port?: number): IsHttpServer;
 }
+//# sourceMappingURL=Server.d.ts.map
