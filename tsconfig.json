@@ -16,6 +16,7 @@
     "resolveJsonModule": true,
     "preserveConstEnums": true,
     "sourceMap": true,
+    "declaration": true,
     "strict": true,
     "exactOptionalPropertyTypes": true,
     "allowUnusedLabels": false,
@@ -24,7 +25,7 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+    "experimentalDecorators": true
   },
   "include": [
     "src/**/*",
