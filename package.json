@@ -23,11 +23,11 @@
         "t": "n0safe-cluster"
     },
     "bin": {
-        "n0safe-serviceWriter": "build/cli-runner/client/serviceWriter.cli.js",
-        "n0safe-reader": "build/cli-runner/client/reader.cli.js",
-        "n0safe-writer": "build/cli-runner/client/writer.cli.js",
-        "n0safe-server": "build/cli-runner/server/server.cli.js",
-        "n0safe-cluster": "build/cli-runner/server/cluster.cli.js"
+        "n0safe-logger-serviceWriter": "build/cli-runner/client/serviceWriter.cli.js",
+        "n0safe-logger-reader": "build/cli-runner/client/reader.cli.js",
+        "n0safe-logger-writer": "build/cli-runner/client/writer.cli.js",
+        "n0safe-logger-server": "build/cli-runner/server/server.cli.js",
+        "n0safe-logger-cluster": "build/cli-runner/server/cluster.cli.js"
     },
     "keywords": [],
     "author": "",
