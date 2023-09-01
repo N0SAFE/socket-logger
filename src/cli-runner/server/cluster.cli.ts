@@ -13,16 +13,16 @@ function myParseInt(value) {
 
 program
   .requiredOption('--port <integer>', 'port number of the server', myParseInt)
+  .requiredOption('-si, --server-info [string...]', 'servers info << port:?path >>')
   .option('--path <string>', 'path of the server')
-  .option('-si, --server-info [string...]', 'servers info << port:?path >>')
 
 program.parse()
 
 const opts = program.opts()
-opts.serverInfo = opts.serverInfo.map((serverInfo) => {
-  const [port, path] = serverInfo.split(':')
+opts.serverInfo = opts.serverInfo?.map((serverInfo) => {
+  const [path, port] = serverInfo.split(':')
   return { port: parseInt(port), path: path?.trim() || '/' }
-})
+}) || []
 
 const options: {
   port: number

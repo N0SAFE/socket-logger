@@ -13,14 +13,14 @@ function myParseInt(value) {
 }
 commander_1.program
     .requiredOption('--port <integer>', 'port number of the server', myParseInt)
-    .option('--path <string>', 'path of the server')
-    .option('-si, --server-info [string...]', 'servers info << port:?path >>');
+    .requiredOption('-si, --server-info [string...]', 'servers info << port:?path >>')
+    .option('--path <string>', 'path of the server');
 commander_1.program.parse();
 const opts = commander_1.program.opts();
-opts.serverInfo = opts.serverInfo.map((serverInfo) => {
-    const [port, path] = serverInfo.split(':');
+opts.serverInfo = opts.serverInfo?.map((serverInfo) => {
+    const [path, port] = serverInfo.split(':');
     return { port: parseInt(port), path: path?.trim() || '/' };
-});
+}) || [];
 const options = opts;
 console.log(options);
 (0, server_1.createCluster)({ port: options.port, path: options.path || '/' }, options.serverInfo, { openOnStart: true });

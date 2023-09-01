@@ -19,7 +19,8 @@
         "watch": "tsc -w",
         "lint": "eslint src --ext .ts",
         "lint:fix": "eslint src --ext .ts --fix",
-        "prettier": "prettier --write \"src/**/*.ts\""
+        "prettier": "prettier --write \"src/**/*.ts\"",
+        "o": "node build/cli-runner/server/cluster.cli.js --port=4000 --server-info=port:4001"
     },
     "bin": {
         "n0safe-logger-serviceWriter": "build/cli-runner/client/serviceWriter.cli.js",
