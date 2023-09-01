@@ -21,6 +21,13 @@
         "lint:fix": "eslint src --ext .ts --fix",
         "prettier": "prettier --write \"src/**/*.ts\""
     },
+    "bin": {
+        "n0safe-serviceWriter": "build/cli-runner/client/serverWriter.cli.js",
+        "n0safe-reader": "build/cli-runner/client/reader.cli.js",
+        "n0safe-writer": "build/cli-runner/client/writer.cli.js",
+        "n0safe-server": "build/cli-runner/server/server.cli.js",
+        "n0safe-cluster": "build/cli-runner/server/cluster.cli.js"
+    },
     "keywords": [],
     "author": "",
     "license": "ISC",
