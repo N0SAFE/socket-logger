@@ -1,6 +1,8 @@
+#!/usr/bin/env node
 import { program, InvalidOptionArgumentError } from 'commander'
 import { createServiceWriter } from '../../client/index'
 import dotenv from 'dotenv'
+
 dotenv.config()
 
 function myParseInt(value: any): number {

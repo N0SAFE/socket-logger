@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { createCluster } from '../../server'
 import { program, InvalidArgumentError } from 'commander'
 

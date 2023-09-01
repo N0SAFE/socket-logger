@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { createReader } from '../../client'
 import { program, InvalidOptionArgumentError } from 'commander'
 

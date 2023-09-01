@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { program, InvalidOptionArgumentError } from 'commander'
 import { createWriter } from '../../client/index'
 
