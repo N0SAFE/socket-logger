@@ -19,8 +19,7 @@
         "watch": "tsc -w",
         "lint": "eslint src --ext .ts",
         "lint:fix": "eslint src --ext .ts --fix",
-        "prettier": "prettier --write \"src/**/*.ts\"",
-        "t": "n0safe-cluster"
+        "prettier": "prettier --write \"src/**/*.ts\""
     },
     "bin": {
         "n0safe-logger-serviceWriter": "build/cli-runner/client/serviceWriter.cli.js",
