@@ -1,0 +1,126 @@
+
+> @n0safe/logger@1.0.0 test
+> jest --silent=false --detectOpenHandles
+
+[0m[7m[1m[31m FAIL [39m[22m[27m[0m [2msrc/server/utils/[22m[1mCluster.test.js[22m ([0m[1m[41m8.92 s[49m[22m[0m)
+  [1m● [22mConsole
+
+    [2mconsole.log[22m
+      redirected
+[2m[22m
+[2m      [2mat Socket.<anonymous> ([22m[2msrc/server/utils/Cluster.test.js[2m:72:17)[22m[2m[22m
+
+[1m[31m  [1m● [22m[1mCluster › should redirect a client to a server[39m[22m
+
+    thrown: "Exceeded timeout of 5000 ms for a test while waiting for `done()` to be called.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+[2m[22m
+[2m    [0m [90m 56 |[39m   })[0m[22m
+[2m    [0m [90m 57 |[39m[0m[22m
+[2m    [0m[31m[1m>[22m[2m[39m[90m 58 |[39m   it([32m'should redirect a client to a server'[39m[33m,[39m (done) [33m=>[39m {[0m[22m
+[2m    [0m [90m    |[39m   [31m[1m^[22m[2m[39m[0m[22m
+[2m    [0m [90m 59 |[39m     cluster [33m=[39m [36mnew[39m [33mCluster[39m({ httpServer[33m:[39m httpServer })[0m[22m
+[2m    [0m [90m 60 |[39m     [36mconst[39m server [33m=[39m cluster[33m.[39mcreateServer({ port[33m:[39m [35m65201[39m })[0m[22m
+[2m    [0m [90m 61 |[39m     [36mconst[39m client [33m=[39m cluster[33m.[39mconnect()[0m[22m
+[2m[22m
+[2m      [2mat [22m[2m[0m[36msrc/server/utils/Cluster.test.js[39m[0m[2m:58:3[22m[2m[22m
+[2m      [2mat Object.<anonymous> ([22m[2m[0m[36msrc/server/utils/Cluster.test.js[39m[0m[2m:5:1)[22m[2m[22m
+
+[0m[7m[1m[31m FAIL [39m[22m[27m[0m [2mbuild/server/utils/[22m[1mCluster.test.js[22m ([0m[1m[41m5.567 s[49m[22m[0m)
+  [1m● [22mConsole
+
+    [2mconsole.log[22m
+      redirected
+[2m[22m
+[2m      [2mat Socket.<anonymous> ([22m[2msrc/server/utils/Cluster.test.js[2m:72:17)[22m[2m[22m
+
+[1m[31m  [1m● [22m[1mCluster › should redirect a client to a server[39m[22m
+
+    [2massert[22m[2m.strictEqual([22m[31mreceived[39m[2m, [22m[32mexpected[39m[2m)[22m
+
+    [0mExpected value to strictly be equal to:[0m
+    [0m[0m  [32m1[39m
+    [0mReceived:[0m
+    [0m[0m  [31m2[39m[0m[0m
+    [0m[0m
+    [0mMessage:[0m
+    [0m  expected 2 to equal 1[0m
+[2m[22m
+[2m    [0m [90m 62 |[39m     cluster[33m.[39monConnection((connection) [33m=>[39m {[0m[22m
+[2m    [0m [90m 63 |[39m       expect(connection[33m.[39mserver)[33m.[39mto[33m.[39mequal(cluster)[0m[22m
+[2m    [0m[31m[1m>[22m[2m[39m[90m 64 |[39m       expect(cluster[33m.[39mconnections[33m.[39msize)[33m.[39mto[33m.[39mequal([35m1[39m)[0m[22m
+[2m    [0m [90m    |[39m                                           [31m[1m^[22m[2m[39m[0m[22m
+[2m    [0m [90m 65 |[39m       expect(client[33m.[39minfo[33m.[39mport)[33m.[39mto[33m.[39mequal([35m65200[39m)[0m[22m
+[2m    [0m [90m 66 |[39m       expect(client[33m.[39minfo[33m.[39mpath)[33m.[39mto[33m.[39mequal([32m'/'[39m)[0m[22m
+[2m    [0m [90m 67 |[39m       expect(client[33m.[39minfo[33m.[39mhost)[33m.[39mto[33m.[39mequal([32m'localhost'[39m)[0m[22m
+[2m[22m
+[2m      [2mat [22m[2msrc/server/utils/Cluster.test.js[2m:64:43[22m[2m[22m
+[2m      [2mat Namespace.<anonymous> ([22m[2msrc/server/utils/Cluster.ts[2m:49:26)[22m[2m[22m
+[2m      [2mat Namespace.emitReserved ([22m[2m../../node_modules/socket.io/dist/typed-events.js[2m:56:22)[22m[2m[22m
+[2m      [2mat Namespace._doConnect ([22m[2m../../node_modules/socket.io/dist/namespace.js[2m:269:14)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/socket.io/dist/namespace.js[2m:231:22[22m[2m[22m
+
+[1m[31m  [1m● [22m[1mCluster › should redirect a client to a server[39m[22m
+
+    [2massert[22m[2m.strictEqual([22m[31mreceived[39m[2m, [22m[32mexpected[39m[2m)[22m
+
+    [0mExpected value to strictly be equal to:[0m
+    [0m[0m  [32m1[39m
+    [0mReceived:[0m
+    [0m[0m  [31m2[39m[0m[0m
+    [0m[0m
+    [0mMessage:[0m
+    [0m  expected 2 to equal 1[0m
+[2m[22m
+[2m    [0m [90m 62 |[39m     cluster[33m.[39monConnection((connection) [33m=>[39m {[0m[22m
+[2m    [0m [90m 63 |[39m       expect(connection[33m.[39mserver)[33m.[39mto[33m.[39mequal(cluster)[0m[22m
+[2m    [0m[31m[1m>[22m[2m[39m[90m 64 |[39m       expect(cluster[33m.[39mconnections[33m.[39msize)[33m.[39mto[33m.[39mequal([35m1[39m)[0m[22m
+[2m    [0m [90m    |[39m                                           [31m[1m^[22m[2m[39m[0m[22m
+[2m    [0m [90m 65 |[39m       expect(client[33m.[39minfo[33m.[39mport)[33m.[39mto[33m.[39mequal([35m65200[39m)[0m[22m
+[2m    [0m [90m 66 |[39m       expect(client[33m.[39minfo[33m.[39mpath)[33m.[39mto[33m.[39mequal([32m'/'[39m)[0m[22m
+[2m    [0m [90m 67 |[39m       expect(client[33m.[39minfo[33m.[39mhost)[33m.[39mto[33m.[39mequal([32m'localhost'[39m)[0m[22m
+[2m[22m
+[2m      [2mat [22m[2msrc/server/utils/Cluster.test.js[2m:64:43[22m[2m[22m
+[2m      [2mat Namespace.<anonymous> ([22m[2msrc/server/utils/Cluster.ts[2m:49:26)[22m[2m[22m
+[2m      [2mat Namespace.emitReserved ([22m[2m../../node_modules/socket.io/dist/typed-events.js[2m:56:22)[22m[2m[22m
+[2m      [2mat Namespace._doConnect ([22m[2m../../node_modules/socket.io/dist/namespace.js[2m:269:14)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/socket.io/dist/namespace.js[2m:231:22[22m[2m[22m
+
+[1m[31m  [1m● [22m[1mCluster › should redirect a client to a server[39m[22m
+
+    thrown: "Exceeded timeout of 5000 ms for a test while waiting for `done()` to be called.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+[2m[22m
+[2m    [0m [90m 56 |[39m   })[0m[22m
+[2m    [0m [90m 57 |[39m[0m[22m
+[2m    [0m[31m[1m>[22m[2m[39m[90m 58 |[39m   it([32m'should redirect a client to a server'[39m[33m,[39m (done) [33m=>[39m {[0m[22m
+[2m    [0m [90m    |[39m   [31m[1m^[22m[2m[39m[0m[22m
+[2m    [0m [90m 59 |[39m     cluster [33m=[39m [36mnew[39m [33mCluster[39m({ httpServer[33m:[39m httpServer })[0m[22m
+[2m    [0m [90m 60 |[39m     [36mconst[39m server [33m=[39m cluster[33m.[39mcreateServer({ port[33m:[39m [35m65201[39m })[0m[22m
+[2m    [0m [90m 61 |[39m     [36mconst[39m client [33m=[39m cluster[33m.[39mconnect()[0m[22m
+[2m[22m
+[2m      [2mat [22m[2msrc/server/utils/Cluster.test.js[2m:58:3[22m[2m[22m
+[2m      [2mat Object.<anonymous> ([22m[2msrc/server/utils/Cluster.test.js[2m:5:1)[22m[2m[22m
+
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mbuild/utils/[22m[1mAdvancedMap.test.js[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mbuild/server/utils/[22m[1mServer.test.js[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mbuild/utils/[22m[1mAdvancedSet.test.js[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2msrc/server/utils/[22m[1mServer.test.js[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2msrc/utils/[22m[1mAdvancedMap.test.js[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2msrc/utils/[22m[1mAdvancedSet.test.js[22m
+
+[1mTest Suites: [22m[1m[31m2 failed[39m[22m, [1m[32m6 passed[39m[22m, 8 total
+[1mTests:       [22m[1m[31m2 failed[39m[22m, [1m[32m58 passed[39m[22m, 60 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m18.559 s[39m[22m
+[2mRan all test suites[22m[2m.[22m
+[31m[39m
+[31mJest has detected the following 1 open handle potentially keeping Jest from exiting:[39m
+[31m[39m
+[31m[39m  [1m● [22m Timeout
+
+    [0m [90m 122 |[39m           [33m:[39m [32m'/'[39m [33m+[39m [36mthis[39m[33m.[39minfo[33m.[39mpath[0m
+    [0m [90m 123 |[39m         [33m:[39m [32m'/'[39m[0m
+    [0m[31m[1m>[22m[39m[90m 124 |[39m     [36mthis[39m[33m.[39msocket [33m=[39m io([0m
+    [0m [90m     |[39m                     [31m[1m^[22m[39m[0m
+  

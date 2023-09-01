@@ -1,0 +1,37 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "target": "esnext",
+    "module": "CommonJS",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "allowJs": true,
+    "outDir": "build",
+    "rootDir": "src",
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "allowUnusedLabels": false,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+  },
+  "include": [
+    "src/**/*",
+  ],
+  "exclude": [
+    "src/**/*.spec.ts",
+    "build/**/*",
+    ".eslintrc.js",
+  ],
+}
