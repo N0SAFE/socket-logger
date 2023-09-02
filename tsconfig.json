@@ -35,5 +35,6 @@
     "src/**/*.spec.ts",
     "build/**/*",
     ".eslintrc.js",
+    "src/__tests__/**/*",
   ],
 }
