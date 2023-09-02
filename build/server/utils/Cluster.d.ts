@@ -1,4 +1,5 @@
 import Server from './Server';
+import Connection from './Connection';
 import { AdvancedMap } from '../../utils';
 import { IsHttpServer } from '../../utils/types';
 type IsServerInfo = {
@@ -18,6 +19,7 @@ export default class Cluster<GlobalStore, ServerStore> extends Server {
     httpServerMap: AdvancedMap<number, IsHttpServer>;
     isOpened: boolean;
     private redirectFn;
+    protected onConnectionFn: (connection: Connection) => void;
     constructor(clusterInfo?: IsServerInfo, serversInfo?: IsServerInfo[], store?: GlobalStore);
     setRedirectFn(callback: (connection: any) => void): void;
     open(serverInfo: number | IsHttpServer | IsServerInfo): this;

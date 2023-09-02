@@ -73,7 +73,7 @@ export class LoggerCluster extends Cluster<any, SpaceMap> {
     this.createServers(
       () => new SpaceMap(),
       ({ server }: { server: Server; store: SpaceMap }) => {
-        log(clc.green('creating server on port ' + server.port + server.path()))
+        log(clc.green('creating server on port ' + server.port + server.p))
         server.onConnection(async (connection: Connection) => {
           const response: GuardResponse =
             (await this.guard.verifyServerConnection?.(
@@ -81,7 +81,7 @@ export class LoggerCluster extends Cluster<any, SpaceMap> {
             )) as GuardResponse
 
           if (!response.success) {
-            response.message && log(clc.red(response.message))
+            // response.message && log(clc.red(response.message))
             connection.socket.emit('error', {
               message: response.message,
               code: 'CONNECTION:NOT:ALLOWED',
@@ -89,21 +89,21 @@ export class LoggerCluster extends Cluster<any, SpaceMap> {
             connection.socket.disconnect()
             return
           } else if (response.success && response.message) {
-            log(clc.yellow(response.message))
+            // log(clc.yellow(response.message))
           }
 
           const timeout = setTimeout(() => {
             loggerConnection.socket.disconnect()
-            log(
-              clc.red(
-                'connection timeout on host ' +
-                  loggerConnection.socket.handshake.headers.host +
-                  ' disconnecting...',
-              ),
-            )
+            // log(
+            //   clc.red(
+            //     'connection timeout on host ' +
+            //       loggerConnection.socket.handshake.headers.host +
+            //       ' disconnecting...',
+            //   ),
+            // )
           }, 10000)
 
-          log(clc.yellow('new connection waiting for subscribe'))
+          // log(clc.yellow('new connection waiting for subscribe'))
           const loggerConnection = new LoggerConnection(
             connection.server,
             connection.socket,
@@ -123,7 +123,7 @@ export class LoggerCluster extends Cluster<any, SpaceMap> {
                 )) as GuardResponse
 
               if (!response.success) {
-                response.message && log(clc.red(response.message))
+                // response.message && log(clc.red(response.message))
                 connection.socket.emit('error', {
                   message: response.message,
                   code: 'SUBSCRIPTION:NOT:ALLOWED',
@@ -131,7 +131,7 @@ export class LoggerCluster extends Cluster<any, SpaceMap> {
                 connection.socket.disconnect()
                 return
               } else if (response.success && response.message) {
-                log(clc.yellow(response.message))
+                // log(clc.yellow(response.message))
               }
 
               connection.socket.emit('info', {
@@ -145,12 +145,12 @@ export class LoggerCluster extends Cluster<any, SpaceMap> {
               loggerConnection.type = type
 
               if (type === 'writer') {
-                log(clc.green('new writer connected on space ' + space))
+                // log(clc.green('new writer connected on space ' + space))
 
                 const loggerConnectionSet = this.addSpaceToServer(server, space)
                 const writerConnectionSet = this.getWritersBySpace(space)
                 if (writerConnectionSet.size === 1) {
-                  log(clc.red('writer already connected on space ' + space))
+                  // log(clc.red('writer already connected on space ' + space))
                   loggerConnection.socket.emit('error', {
                     message: 'writer already connected',
                     code: 'WRITER:ALREADY:CONNECTED',
@@ -179,7 +179,7 @@ export class LoggerCluster extends Cluster<any, SpaceMap> {
                   this.removeByConnection(loggerConnection)
                 })
               } else if (type === 'reader') {
-                log(clc.green('new reader connected on space ' + space))
+                // log(clc.green('new reader connected on space ' + space))
                 const loggerConnectionSet = this.addSpaceToServer(server, space)
                 loggerConnectionSet.add(loggerConnection)
 
@@ -219,14 +219,14 @@ export class LoggerCluster extends Cluster<any, SpaceMap> {
         connection.socket.disconnect()
         return
       } else if (response.success && response.message) {
-        log(clc.yellow(response.message))
+        // log(clc.yellow(response.message))
       }
 
-      log(
-        clc.yellow(
-          'new connection on the cluster waiting for the client to request his server',
-        ),
-      )
+      // log(
+      //   clc.yellow(
+      //     'new connection on the cluster waiting for the client to request his server',
+      //   ),
+      // )
 
       const loggerConnection = new LoggerConnection(connection)
 
@@ -248,13 +248,13 @@ export class LoggerCluster extends Cluster<any, SpaceMap> {
           loggerConnection.space = space
           const server = this.searchServerToUse(space)
 
-          log(clc.green('new connection redirected to ' + server.port))
+          // log(clc.green('new connection redirected to ' + server.port))
           this.redirect(loggerConnection.server, server)
-          log(
-            clc.yellow(
-              'waiting for connection on ' + server.port + server.path(),
-            ),
-          )
+          // log(
+          //   clc.yellow(
+          //     'waiting for connection on ' + server.port + server.p,
+          //   ),
+          // )
 
           resolve({ port: server.port, space })
         })

@@ -34,11 +34,11 @@ class LoggerCluster extends utils_2.Cluster {
         guard.verifyClusterConnection =
             guard.verifyClusterConnection || (async () => ({ success: true }));
         this.createServers(() => new SpaceMap(), ({ server }) => {
-            (0, exports.log)(cli_color_1.default.green('creating server on port ' + server.port + server.path()));
+            (0, exports.log)(cli_color_1.default.green('creating server on port ' + server.port + server.p));
             server.onConnection(async (connection) => {
                 const response = (await this.guard.verifyServerConnection?.(connection));
                 if (!response.success) {
-                    response.message && (0, exports.log)(cli_color_1.default.red(response.message));
+                    // response.message && log(clc.red(response.message))
                     connection.socket.emit('error', {
                         message: response.message,
                         code: 'CONNECTION:NOT:ALLOWED',
@@ -47,21 +47,25 @@ class LoggerCluster extends utils_2.Cluster {
                     return;
                 }
                 else if (response.success && response.message) {
-                    (0, exports.log)(cli_color_1.default.yellow(response.message));
+                    // log(clc.yellow(response.message))
                 }
                 const timeout = setTimeout(() => {
                     loggerConnection.socket.disconnect();
-                    (0, exports.log)(cli_color_1.default.red('connection timeout on host ' +
-                        loggerConnection.socket.handshake.headers.host +
-                        ' disconnecting...'));
+                    // log(
+                    //   clc.red(
+                    //     'connection timeout on host ' +
+                    //       loggerConnection.socket.handshake.headers.host +
+                    //       ' disconnecting...',
+                    //   ),
+                    // )
                 }, 10000);
-                (0, exports.log)(cli_color_1.default.yellow('new connection waiting for subscribe'));
+                // log(clc.yellow('new connection waiting for subscribe'))
                 const loggerConnection = new LoggerConnection(connection.server, connection.socket);
                 connection.socket.on('subscribe', async (data) => {
                     clearTimeout(timeout);
                     const response = (await this.guard.verifyServerSubscription?.(connection, data));
                     if (!response.success) {
-                        response.message && (0, exports.log)(cli_color_1.default.red(response.message));
+                        // response.message && log(clc.red(response.message))
                         connection.socket.emit('error', {
                             message: response.message,
                             code: 'SUBSCRIPTION:NOT:ALLOWED',
@@ -70,7 +74,7 @@ class LoggerCluster extends utils_2.Cluster {
                         return;
                     }
                     else if (response.success && response.message) {
-                        (0, exports.log)(cli_color_1.default.yellow(response.message));
+                        // log(clc.yellow(response.message))
                     }
                     connection.socket.emit('info', {
                         message: response.message,
@@ -80,11 +84,11 @@ class LoggerCluster extends utils_2.Cluster {
                     loggerConnection.space = space;
                     loggerConnection.type = type;
                     if (type === 'writer') {
-                        (0, exports.log)(cli_color_1.default.green('new writer connected on space ' + space));
+                        // log(clc.green('new writer connected on space ' + space))
                         const loggerConnectionSet = this.addSpaceToServer(server, space);
                         const writerConnectionSet = this.getWritersBySpace(space);
                         if (writerConnectionSet.size === 1) {
-                            (0, exports.log)(cli_color_1.default.red('writer already connected on space ' + space));
+                            // log(clc.red('writer already connected on space ' + space))
                             loggerConnection.socket.emit('error', {
                                 message: 'writer already connected',
                                 code: 'WRITER:ALREADY:CONNECTED',
@@ -109,7 +113,7 @@ class LoggerCluster extends utils_2.Cluster {
                         });
                     }
                     else if (type === 'reader') {
-                        (0, exports.log)(cli_color_1.default.green('new reader connected on space ' + space));
+                        // log(clc.green('new reader connected on space ' + space))
                         const loggerConnectionSet = this.addSpaceToServer(server, space);
                         loggerConnectionSet.add(loggerConnection);
                         const writerConnectionSet = this.getWritersBySpace(space);
@@ -142,9 +146,13 @@ class LoggerCluster extends utils_2.Cluster {
                 return;
             }
             else if (response.success && response.message) {
-                (0, exports.log)(cli_color_1.default.yellow(response.message));
+                // log(clc.yellow(response.message))
             }
-            (0, exports.log)(cli_color_1.default.yellow('new connection on the cluster waiting for the client to request his server'));
+            // log(
+            //   clc.yellow(
+            //     'new connection on the cluster waiting for the client to request his server',
+            //   ),
+            // )
             const loggerConnection = new LoggerConnection(connection);
             const timeout = setTimeout(() => {
                 loggerConnection.socket.disconnect();
@@ -158,9 +166,13 @@ class LoggerCluster extends utils_2.Cluster {
                     const { space } = data;
                     loggerConnection.space = space;
                     const server = this.searchServerToUse(space);
-                    (0, exports.log)(cli_color_1.default.green('new connection redirected to ' + server.port));
+                    // log(clc.green('new connection redirected to ' + server.port))
                     this.redirect(loggerConnection.server, server);
-                    (0, exports.log)(cli_color_1.default.yellow('waiting for connection on ' + server.port + server.path()));
+                    // log(
+                    //   clc.yellow(
+                    //     'waiting for connection on ' + server.port + server.p,
+                    //   ),
+                    // )
                     resolve({ port: server.port, space });
                 });
             });

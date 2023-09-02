@@ -27,9 +27,9 @@ commander_1.program
     .option('-to, --timeout', 'initial-timeout', myParseInt)
     .option('-w, --wait', 'wait for the connection to be ready');
 commander_1.program.parse();
-if (process.env.ARGS_FOR_SOCKET_LOGGER) {
-    console.log('env: ' + process.env.ARGS_FOR_SOCKET_LOGGER);
-}
+// if (process.env.ARGS_FOR_SOCKET_LOGGER) {
+//   console.log('env: ' + process.env.ARGS_FOR_SOCKET_LOGGER)
+// }
 const options = {
     ...{
         host: 'localhost',
@@ -44,7 +44,7 @@ const options = {
         : {}),
     ...commander_1.program.opts(),
 };
-console.log(options);
+// console.log(options)
 (0, index_1.createServiceWriter)({
     port: options.port,
     space: options.space,

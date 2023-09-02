@@ -34,7 +34,7 @@ const options = {
         : {}),
     ...commander_1.program.opts(),
 };
-console.log(options);
+// console.log(options)
 const client = (0, index_1.createWriter)({
     port: options.port,
     space: options.space,

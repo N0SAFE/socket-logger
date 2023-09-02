@@ -8,6 +8,7 @@ export default class Server extends _Server implements AdvancedSocketMethods {
     connections: Set<Connection>;
     opened: boolean;
     p: string;
+    protected onConnectionFn: (connection: Connection) => void;
     constructor(...args: [] | [...any] | [number, ...any]);
     onConnection(callback: (connection: Connection) => any): void;
     open(srv: number | IsHttpServer): void;

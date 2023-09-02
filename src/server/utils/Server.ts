@@ -10,6 +10,11 @@ export default class Server extends _Server implements AdvancedSocketMethods {
   public connections = new Set<Connection>()
   public opened = false
   public p = '/'
+  protected onConnectionFn: (connection: Connection) => void = () => {
+    this.emit('connection', {
+      isCluster: false,
+    })
+  }
 
   constructor(...args: [] | [...any] | [number, ...any]) {
     let _args = args as any[]
@@ -34,6 +39,7 @@ export default class Server extends _Server implements AdvancedSocketMethods {
     this.on('connection', (socket) => {
       const connection = new Connection(this, socket)
       this.connections.add(connection)
+      this.onConnectionFn(connection)
       socket.on('disconnect', () => {
         this.connections.delete(connection)
       })
@@ -45,9 +51,6 @@ export default class Server extends _Server implements AdvancedSocketMethods {
       const connection = this.findConnection(
         (c) => c.socket === socket,
       ) as unknown as Connection
-      this.emit('connection', {
-        isCluster: false,
-      })
       callback(connection)
     })
   }

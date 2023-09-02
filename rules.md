@@ -1,0 +1,1 @@
+the cluster and the server can be on the same port only if the server is not on the same path and only if the cluster is not on the root ('/')

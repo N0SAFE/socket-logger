@@ -46,7 +46,7 @@ const options: {
   ...(program.opts() as any),
 }
 
-console.log(options)
+// console.log(options)
 
 const client = createWriter(
   {

@@ -24,6 +24,11 @@ class Cluster extends Server_1.default {
         }
         this.redirect(connection.server, server.key);
     };
+    onConnectionFn = () => {
+        this.emit('connection', {
+            isCluster: true,
+        });
+    };
     constructor(clusterInfo = { port: 65000, path: '/' }, serversInfo = [{ port: 65001, path: '/' }], store = {}) {
         super({ path: clusterInfo.path });
         this.clusterInfo = clusterInfo;
@@ -40,19 +45,6 @@ class Cluster extends Server_1.default {
     setRedirectFn(callback) {
         this.redirectFn = callback;
     }
-    // public onConnection(
-    //   callback: (connection: Connection) => Promise<any> | any,
-    // ) {
-    //   this.on('connection', async (socket) => {
-    //     const connection = new Connection(this, socket)
-    //     this.emit('connection', {
-    //       isCluster: true,
-    //     })
-    //     const info = await callback(connection)
-    //     this.emit('redirect', info)
-    //   })
-    //   return this
-    // }
     open(serverInfo) {
         this.emit('beforeOpen');
         if (serverInfo instanceof http_1.Server) {

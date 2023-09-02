@@ -51,7 +51,7 @@ if (options.listSpace && options.space) {
   process.exit(0)
 }
 
-console.log(options)
+// console.log(options)
 
 const client = createReader({
   port: options.port,

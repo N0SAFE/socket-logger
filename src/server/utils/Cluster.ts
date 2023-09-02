@@ -33,6 +33,12 @@ export default class Cluster<GlobalStore, ServerStore> extends Server {
     }
     this.redirect(connection.server, server.key)
   }
+  protected onConnectionFn: (connection: Connection) => void = () => {
+    this.emit('connection', {
+      isCluster: true,
+    })
+  }
+  
   constructor(
     private readonly clusterInfo: IsServerInfo = { port: 65000, path: '/' },
     private readonly serversInfo: IsServerInfo[] = [{ port: 65001, path: '/' }],
@@ -53,20 +59,6 @@ export default class Cluster<GlobalStore, ServerStore> extends Server {
   setRedirectFn(callback: (connection) => void) {
     this.redirectFn = callback
   }
-
-  // public onConnection(
-  //   callback: (connection: Connection) => Promise<any> | any,
-  // ) {
-  //   this.on('connection', async (socket) => {
-  //     const connection = new Connection(this, socket)
-  //     this.emit('connection', {
-  //       isCluster: true,
-  //     })
-  //     const info = await callback(connection)
-  //     this.emit('redirect', info)
-  //   })
-  //   return this
-  // }
 
   public open(serverInfo: number | IsHttpServer | IsServerInfo) {
     this.emit('beforeOpen')

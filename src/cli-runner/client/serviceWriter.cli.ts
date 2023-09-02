@@ -27,9 +27,9 @@ program
 
 program.parse()
 
-if (process.env.ARGS_FOR_SOCKET_LOGGER) {
-  console.log('env: ' + process.env.ARGS_FOR_SOCKET_LOGGER)
-}
+// if (process.env.ARGS_FOR_SOCKET_LOGGER) {
+//   console.log('env: ' + process.env.ARGS_FOR_SOCKET_LOGGER)
+// }
 
 const options: {
   port: number
@@ -56,7 +56,7 @@ const options: {
   ...(program.opts() as any),
 }
 
-console.log(options)
+// console.log(options)
 
 createServiceWriter(
   {

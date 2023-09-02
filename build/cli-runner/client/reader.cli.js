@@ -38,7 +38,7 @@ if (options.listSpace && options.space) {
     console.log("You can't list the space and read it at the same time");
     process.exit(0);
 }
-console.log(options);
+// console.log(options)
 const client = (0, client_1.createReader)({
     port: options.port,
     space: options.space,

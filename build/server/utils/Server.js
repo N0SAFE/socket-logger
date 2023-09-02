@@ -12,6 +12,11 @@ class Server extends socket_io_1.Server {
     connections = new Set();
     opened = false;
     p = '/';
+    onConnectionFn = () => {
+        this.emit('connection', {
+            isCluster: false,
+        });
+    };
     constructor(...args) {
         let _args = args;
         let srv;
@@ -34,6 +39,7 @@ class Server extends socket_io_1.Server {
         this.on('connection', (socket) => {
             const connection = new Connection_1.default(this, socket);
             this.connections.add(connection);
+            this.onConnectionFn(connection);
             socket.on('disconnect', () => {
                 this.connections.delete(connection);
             });
@@ -42,9 +48,6 @@ class Server extends socket_io_1.Server {
     onConnection(callback) {
         this.on('connection', (socket) => {
             const connection = this.findConnection((c) => c.socket === socket);
-            this.emit('connection', {
-                isCluster: false,
-            });
             callback(connection);
         });
     }
