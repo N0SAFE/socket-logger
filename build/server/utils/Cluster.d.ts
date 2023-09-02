@@ -1,16 +1,7 @@
 import Server from './Server';
 import Connection from './Connection';
 import { AdvancedMap } from '../../utils';
-import { IsHttpServer } from '../../utils/types';
-type IsServerInfo = {
-    port: number;
-    path?: string | undefined;
-    httpServer?: never | undefined;
-} | {
-    httpServer: IsHttpServer;
-    path?: string | undefined;
-    port?: never | undefined;
-};
+import type { IsHttpServer, IsServerInfo } from './types';
 export default class Cluster<GlobalStore, ServerStore> extends Server {
     private readonly clusterInfo;
     private readonly serversInfo;
@@ -20,7 +11,9 @@ export default class Cluster<GlobalStore, ServerStore> extends Server {
     isOpened: boolean;
     private redirectFn;
     protected onConnectionFn: (connection: Connection) => void;
-    constructor(clusterInfo?: IsServerInfo, serversInfo?: IsServerInfo[], store?: GlobalStore);
+    constructor(clusterInfo?: IsServerInfo, serversInfo?: IsServerInfo[], opts?: {
+        openOnStart: boolean;
+    }, store?: GlobalStore);
     setRedirectFn(callback: (connection: any) => void): void;
     open(serverInfo: number | IsHttpServer | IsServerInfo): this;
     close(): this;
@@ -50,5 +43,4 @@ export default class Cluster<GlobalStore, ServerStore> extends Server {
         store: ServerStore;
     }) => void, onServerError?: (error: Error, store: ServerStore) => void): void;
 }
-export {};
 //# sourceMappingURL=Cluster.d.ts.map

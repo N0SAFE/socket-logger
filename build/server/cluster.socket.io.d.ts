@@ -1,5 +1,6 @@
 import { AdvancedMap, AdvancedSet } from '../utils';
 import { Connection, Server, Cluster } from './utils';
+import type { IsHttpServer, IsServerInfo } from './utils/types';
 export declare const log: (message: string, ...args: any[]) => void;
 type Space = string;
 type ConnectionType = 'writer' | 'reader' | 'admin';
@@ -36,7 +37,7 @@ export declare class LoggerCluster extends Cluster<any, SpaceMap> {
     constructor(clusterInfo: any, serversInfo: any[] | undefined, { openOnStart }: {
         openOnStart?: boolean;
     }, guard?: Guard);
-    open(port: number): this;
+    open(srv: number | IsHttpServer | IsServerInfo): this;
     getSpaceMapByServer(server: Server): SpaceMap;
     getLoggerConnectionSetBySpace(space: Space): LoggerConnectionSet;
     getSpaceByLoggerConnection(connection: LoggerConnection): Space | undefined;

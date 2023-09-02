@@ -2,7 +2,7 @@ import { default as io, Socket } from 'socket.io-client'
 import { EventEmitter } from 'events'
 import { AdvancedSocketMethods } from '../../utils/types'
 import clc from 'cli-color'
-import type { IsInfo } from '../../utils/types'
+import type { IsInfo } from './types'
 
 export interface IsAutorestartBehavior {
   restartOnDisconnect?: {

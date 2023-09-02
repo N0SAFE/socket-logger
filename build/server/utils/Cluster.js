@@ -29,12 +29,14 @@ class Cluster extends Server_1.default {
             isCluster: true,
         });
     };
-    constructor(clusterInfo = { port: 65000, path: '/' }, serversInfo = [{ port: 65001, path: '/' }], store = {}) {
+    constructor(clusterInfo = { port: 65000, path: '/' }, serversInfo = [{ port: 65001, path: '/' }], opts = { openOnStart: true }, store = {}) {
         super({ path: clusterInfo.path });
         this.clusterInfo = clusterInfo;
         this.serversInfo = serversInfo;
         this.store = store;
-        this.open(this.clusterInfo);
+        if (opts.openOnStart) {
+            this.open(this.clusterInfo);
+        }
         this.servers = new utils_1.AdvancedMap();
         this.emit('beforeCreateServers');
         dummyFunction(this.store); // this function is called to avoid error on the ts parser for the unused variable store

@@ -2,24 +2,12 @@ import Server from './Server'
 // import { Server as _Server } from 'socket.io'
 import Connection from './Connection'
 import { AdvancedMap } from '../../utils'
-import { IsHttpServer } from '../../utils/types'
+import type { IsHttpServer, IsServerInfo } from './types'
 import { Server as HttpServer } from 'http'
 
 function dummyFunction(...args: any[]) {
   args
 }
-
-type IsServerInfo =
-  | {
-      port: number
-      path?: string | undefined
-      httpServer?: never | undefined
-    }
-  | {
-      httpServer: IsHttpServer
-      path?: string | undefined
-      port?: never | undefined
-    }
 
 export default class Cluster<GlobalStore, ServerStore> extends Server {
   public servers: AdvancedMap<Server, ServerStore>
@@ -42,10 +30,13 @@ export default class Cluster<GlobalStore, ServerStore> extends Server {
   constructor(
     private readonly clusterInfo: IsServerInfo = { port: 65000, path: '/' },
     private readonly serversInfo: IsServerInfo[] = [{ port: 65001, path: '/' }],
+    opts = { openOnStart: true },
     private readonly store = {} as GlobalStore,
   ) {
     super({ path: clusterInfo.path })
-    this.open(this.clusterInfo)
+    if(opts.openOnStart) {
+      this.open(this.clusterInfo)
+    }
 
     this.servers = new AdvancedMap<Server, ServerStore>()
     this.emit('beforeCreateServers')

@@ -25,7 +25,7 @@ class LoggerCluster extends utils_2.Cluster {
     guard;
     adminReader = new LoggerConnectionSet();
     constructor(clusterInfo = { port: 65000, path: '/' }, serversInfo = [{ port: 65001, path: '/' }], { openOnStart = true }, guard = {}) {
-        super(clusterInfo, serversInfo);
+        super(clusterInfo, serversInfo, { openOnStart: false }, {});
         this.guard = guard;
         guard.verifyServerConnection =
             guard.verifyServerConnection || (async () => ({ success: true }));
@@ -179,12 +179,12 @@ class LoggerCluster extends utils_2.Cluster {
             return promise;
         });
         if (openOnStart) {
-            this.open(clusterInfo.port);
+            this.open(clusterInfo);
         }
     }
-    open(port) {
-        super.open(port);
-        (0, exports.log)('opening cluster on port ' + port);
+    open(srv) {
+        super.open(srv);
+        (0, exports.log)('opening cluster on port ' + srv);
         (0, exports.log)('waiting for connections...');
         return this;
     }

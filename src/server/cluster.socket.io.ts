@@ -1,6 +1,7 @@
 import { AdvancedMap, AdvancedSet } from '../utils'
 import { Connection, Server, Cluster } from './utils'
 import clc from 'cli-color'
+import type { IsHttpServer, IsServerInfo } from './utils/types'
 
 export const log = (message: string, ...args: any[]) => {
   console.log(`[ ${clc.yellow('SOCKET')} ] ` + message, args)
@@ -61,7 +62,7 @@ export class LoggerCluster extends Cluster<any, SpaceMap> {
     { openOnStart = true }: { openOnStart?: boolean },
     private guard: Guard = {},
   ) {
-    super(clusterInfo, serversInfo)
+    super(clusterInfo, serversInfo, { openOnStart: false }, {})
 
     guard.verifyServerConnection =
       guard.verifyServerConnection || (async () => ({ success: true }))
@@ -264,13 +265,13 @@ export class LoggerCluster extends Cluster<any, SpaceMap> {
     })
 
     if (openOnStart) {
-      this.open(clusterInfo.port)
+      this.open(clusterInfo)
     }
   }
 
-  public open(port: number) {
-    super.open(port)
-    log('opening cluster on port ' + port)
+  public open(srv: number | IsHttpServer | IsServerInfo) {
+    super.open(srv)
+    log('opening cluster on port ' + srv)
     log('waiting for connections...')
     return this
   }

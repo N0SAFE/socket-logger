@@ -1,15 +1,3 @@
-import { Server as _HttpServer } from 'http'
-
-export interface IsInfo {
-  host: string
-  port?: number | undefined
-  path: string
-  protocol: string
-  [key: string]: any
-}
-
-export type IsHttpServer = _HttpServer & { port?: number | undefined }
-
 export interface AdvancedSocketMethods {
   /* The `awaitFor` method in the `AdvancedSocketMethod` interface is used to wait for a specific
     event (`ev`) to occur. It takes an optional `callback` function that can be used to filter the

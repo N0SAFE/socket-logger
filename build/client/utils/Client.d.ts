@@ -1,6 +1,6 @@
 import { Socket } from 'socket.io-client';
 import { AdvancedSocketMethods } from '../../utils/types';
-import type { IsInfo } from '../../utils/types';
+import type { IsInfo } from './types';
 export interface IsAutorestartBehavior {
     restartOnDisconnect?: {
         active?: boolean;
