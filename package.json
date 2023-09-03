@@ -1,11 +1,11 @@
 {
     "name": "@n0safe/logger",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "",
     "publishConfig": {
         "access": "public"
     },
-    "main": "build/index.js",
+    "main": "dist/index.js",
     "directories": {
         "test": "tests"
     },
@@ -26,11 +26,11 @@
         "prepublishOnly": "git diff --quiet --exit-code && npm run build && git push --follow-tags origin main || echo Please commit your changes before publishing && exit 1"
     },
     "bin": {
-        "n0safe-logger-serviceWriter": "build/cli-runner/client/serviceWriter.cli.js",
-        "n0safe-logger-reader": "build/cli-runner/client/reader.cli.js",
-        "n0safe-logger-writer": "build/cli-runner/client/writer.cli.js",
-        "n0safe-logger-server": "build/cli-runner/server/server.cli.js",
-        "n0safe-logger-cluster": "build/cli-runner/server/cluster.cli.js"
+        "n0safe-logger-serviceWriter": "dist/cli-runner/client/serviceWriter.cli.js",
+        "n0safe-logger-reader": "dist/cli-runner/client/reader.cli.js",
+        "n0safe-logger-writer": "dist/cli-runner/client/writer.cli.js",
+        "n0safe-logger-server": "dist/cli-runner/server/server.cli.js",
+        "n0safe-logger-cluster": "dist/cli-runner/server/cluster.cli.js"
     },
     "keywords": [],
     "author": "",
