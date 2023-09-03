@@ -6,6 +6,11 @@
         "access": "public"
     },
     "main": "dist/index.js",
+    "exports": {
+        "./client": "./dist/client/index.js",
+        "./server": "./dist/server/index.js",
+        "./utils": "./dist/utils/index.js"
+    },
     "directories": {
         "test": "tests"
     },
