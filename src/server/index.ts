@@ -13,4 +13,5 @@ export function createServer() {
   return undefined
 }
 
-export { LoggerCluster }
+export * from './utils'
+export { LoggerCluster, Guard as LoggerClusterGuard }

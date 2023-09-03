@@ -152,4 +152,5 @@ export function createServiceWriter(
   return Promise.resolve({ writer, subProcess })
 }
 
+export * from './utils'
 export { LoggerReaderClient, LoggerWriterClient }
