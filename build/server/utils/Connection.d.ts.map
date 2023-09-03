@@ -1,1 +1,0 @@
-{"version":3,"file":"Connection.d.ts","sourceRoot":"","sources":["../../../src/server/utils/Connection.ts"],"names":[],"mappings":"AAAA,OAAO,MAAM,MAAM,UAAU,CAAA;AAE7B,MAAM,CAAC,OAAO,OAAO,UAAU;IACtB,MAAM,EAAE,MAAM,CAAA;IACd,MAAM,EAAE,GAAG,CAAA;gBACN,GAAG,IAAI,EAAE,CAAC,MAAM,EAAE,GAAG,CAAC,GAAG,CAAC,UAAU,CAAC;CAiBlD"}
