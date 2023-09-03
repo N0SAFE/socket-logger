@@ -9,7 +9,7 @@
       "dom"
     ],
     "allowJs": true,
-    "outDir": "build",
+    "outDir": "dist",
     "rootDir": "src",
     "noImplicitAny": false,
     "esModuleInterop": true,
@@ -33,7 +33,7 @@
   ],
   "exclude": [
     "src/**/*.spec.ts",
-    "build/**/*",
+    "dist/**/*",
     ".eslintrc.js",
     "src/__tests__/**/*",
   ],
