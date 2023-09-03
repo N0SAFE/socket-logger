@@ -1,12 +1,12 @@
 {
     "name": "@n0safe/logger",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "",
     "publishConfig": {
         "access": "public"
     },
-    "main": "dist/index.js",
     "exports": {
+        ".": "./dist/index.js",
         "./client": "./dist/client/index.js",
         "./server": "./dist/server/index.js",
         "./utils": "./dist/utils/index.js"
