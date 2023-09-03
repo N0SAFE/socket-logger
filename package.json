@@ -1,7 +1,10 @@
 {
     "name": "@n0safe/logger",
-    "version": "1.0.0",
+    "version": "1.0.5",
     "description": "",
+    "publishConfig": {
+        "access": "public"
+    },
     "main": "build/index.js",
     "directories": {
         "test": "tests"
@@ -20,7 +23,7 @@
         "lint": "eslint src --ext .ts",
         "lint:fix": "eslint src --ext .ts --fix",
         "prettier": "prettier --write \"src/**/*.ts\"",
-        "postinstall": "npm run build"
+        "prepublishOnly": "git diff --quiet --exit-code && npm run build && git push --follow-tags origin main || echo Please commit your changes before publishing && exit 1"
     },
     "bin": {
         "n0safe-logger-serviceWriter": "build/cli-runner/client/serviceWriter.cli.js",
