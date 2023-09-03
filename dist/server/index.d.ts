@@ -3,5 +3,6 @@ export declare function createCluster(clusterInfo: any, serversInfo: any[] | und
     openOnStart?: boolean;
 }, guard?: Guard): LoggerCluster;
 export declare function createServer(): undefined;
-export { LoggerCluster };
+export * from './utils';
+export { LoggerCluster, Guard as LoggerClusterGuard };
 //# sourceMappingURL=index.d.ts.map

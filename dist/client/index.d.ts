@@ -36,5 +36,6 @@ export declare function createServiceWriter({ port, host, protocol, path, space,
     writer: LoggerWriterClient;
     subProcess: ChildProcessWithoutNullStreams;
 }>;
+export * from './utils';
 export { LoggerReaderClient, LoggerWriterClient };
 //# sourceMappingURL=index.d.ts.map
