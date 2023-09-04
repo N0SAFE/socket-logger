@@ -24,7 +24,7 @@
         "lint": "eslint src --ext .ts",
         "lint:fix": "eslint src --ext .ts --fix",
         "prettier": "prettier --write \"src/**/*.ts\"",
-        "prepublishOnly": "git diff --quiet --exit-code && npm run build && git push --follow-tags origin main || echo Please commit your changes before publishing && exit 1"
+        "prepublishOnly": "npm run build && git diff --quiet --exit-code && git push --follow-tags origin main || echo Please commit your changes before publishing && exit 1"
     },
     "bin": {
         "n0safe-logger-serviceWriter": "dist/cli-runner/client/serviceWriter.cli.js",
