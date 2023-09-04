@@ -1,4 +1,4 @@
-import type { Promisable } from "@/shared/types";
+import type { Promisable } from "../shared/types";
 import type { Connection } from "./utils";
 export type Space = string;
 export type ConnectionType = 'writer' | 'reader' | 'admin';

@@ -1,5 +1,5 @@
 import { Socket } from 'socket.io-client';
-import { AdvancedSocketMethods } from '@/shared/types';
+import { AdvancedSocketMethods } from '../../shared/types';
 import type { IsInfo } from './types';
 export default class Client implements AdvancedSocketMethods {
     info?: IsInfo | undefined;

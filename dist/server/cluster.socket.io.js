@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoggerCluster = exports.log = void 0;
-const shared_1 = require("@/shared");
+const shared_1 = require("../shared");
 const utils_1 = require("./utils");
 const cli_color_1 = __importDefault(require("cli-color"));
 const _1 = require(".");

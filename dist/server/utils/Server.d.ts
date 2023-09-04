@@ -1,8 +1,8 @@
 import { Server as _Server } from 'socket.io';
 import Connection from './Connection';
-import { AdvancedSocketMethods } from '@/shared/types';
+import { AdvancedSocketMethods } from '../../shared/types';
 import type { IsHttpServer, IsServerInfo } from './types';
-import Client from '@/client/utils/Client';
+import Client from '../../client/utils/Client';
 export default class Server extends _Server implements AdvancedSocketMethods {
     port: number | undefined;
     connections: Set<Connection>;

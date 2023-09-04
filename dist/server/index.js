@@ -17,7 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoggerCluster = exports.createServer = exports.createCluster = exports.LoggerConnection = exports.SpaceMap = exports.LoggerConnectionSet = void 0;
 const cluster_socket_io_1 = require("./cluster.socket.io");
 Object.defineProperty(exports, "LoggerCluster", { enumerable: true, get: function () { return cluster_socket_io_1.LoggerCluster; } });
-const shared_1 = require("@/shared");
+const shared_1 = require("../shared");
 const utils_1 = require("./utils");
 class LoggerConnectionSet extends shared_1.AdvancedSet {
 }

@@ -1,6 +1,6 @@
 import { LoggerCluster } from './cluster.socket.io';
 import type { Guard, ConnectionType, Space } from './types';
-import { AdvancedMap, AdvancedSet } from '@/shared';
+import { AdvancedMap, AdvancedSet } from '../shared';
 import { Connection } from './utils';
 export declare class LoggerConnectionSet extends AdvancedSet<LoggerConnection> {
 }

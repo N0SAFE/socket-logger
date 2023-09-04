@@ -1,7 +1,7 @@
 import Server from './Server';
 import Connection from './Connection';
-import { AdvancedMap } from '@/shared';
-import { Promisable, Undefinedable } from '@/shared/types';
+import { AdvancedMap } from '../../shared';
+import { Promisable, Undefinedable } from '../../shared/types';
 import type { IsHttpServer, IsServerInfo } from './types';
 export default class Cluster<GlobalStore, ServerStore> extends Server {
     private readonly clusterInfo;

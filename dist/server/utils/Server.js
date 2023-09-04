@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const socket_io_1 = require("socket.io");
 const Connection_1 = __importDefault(require("./Connection"));
 const http_1 = require("http");
-const Client_1 = __importDefault(require("@/client/utils/Client"));
+const Client_1 = __importDefault(require("../../client/utils/Client"));
 class Server extends socket_io_1.Server {
     port;
     connections = new Set();

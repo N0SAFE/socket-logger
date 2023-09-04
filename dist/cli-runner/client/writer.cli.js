@@ -2,7 +2,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const commander_1 = require("commander");
-const index_1 = require("@/client/index");
+const index_1 = require("../../client/index");
 function myParseInt(value) {
     // parseInt takes a string and a radix
     const parsedValue = parseInt(value, 10);
