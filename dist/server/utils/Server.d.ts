@@ -1,4 +1,4 @@
-import { Server as _Server } from 'socket.io';
+import { ServerOptions, Server as _Server } from 'socket.io';
 import Connection from './Connection';
 import { AdvancedSocketMethods } from '../../utils/types';
 import type { IsHttpServer } from './types';
@@ -9,7 +9,11 @@ export default class Server extends _Server implements AdvancedSocketMethods {
     opened: boolean;
     p: string;
     protected onConnectionFn: (connection: Connection) => void;
-    constructor(...args: [] | [...any] | [number, ...any]);
+    constructor(...args: [] | [Partial<ServerOptions> & {
+        serverOptions?: Partial<ServerOptions> | undefined;
+    }] | [number | IsHttpServer] | [number | IsHttpServer, Partial<ServerOptions> & {
+        serverOptions?: Partial<ServerOptions> | undefined;
+    }]);
     onConnection(callback: (connection: Connection) => any): void;
     open(srv: number | IsHttpServer): void;
     awaitFor(eventName: any, _callback?: (...args: any[]) => boolean): Promise<unknown>;

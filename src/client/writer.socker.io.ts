@@ -1,15 +1,6 @@
 import clc from 'cli-color'
 import { Client } from './utils'
-
-type Payload = {
-  type: 'writer'
-  space: string
-  [key: string]: any
-}
-export interface WriterGuard {
-  sendRequestPayloadOnClusterConnect?: (payload: Payload) => Payload
-  sendRequestPayloadOnServerConnect?: (payload: Payload) => Payload
-}
+import type { WriterGuard } from './types'
 
 class LoggerWriterClient extends Client {
   constructor(

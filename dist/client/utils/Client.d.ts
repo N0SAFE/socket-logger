@@ -1,16 +1,6 @@
 import { Socket } from 'socket.io-client';
 import { AdvancedSocketMethods } from '../../utils/types';
 import type { IsInfo } from './types';
-export interface IsAutorestartBehavior {
-    restartOnDisconnect?: {
-        active?: boolean;
-        timeout?: number;
-    };
-    restartOnError?: {
-        active?: boolean;
-        timeout?: number;
-    };
-}
 export default class Client implements AdvancedSocketMethods {
     info?: IsInfo | undefined;
     private socket?;

@@ -1,40 +1,12 @@
-import { AdvancedMap, AdvancedSet } from '../utils';
-import { Connection, Server, Cluster } from './utils';
+import { Server, Cluster } from './utils';
 import type { IsHttpServer, IsServerInfo } from './utils/types';
+import type { Space, Guard } from './types';
+import { LoggerConnectionSet, SpaceMap, LoggerConnection } from '.';
 export declare const log: (message: string, ...args: any[]) => void;
-type Space = string;
-type ConnectionType = 'writer' | 'reader' | 'admin';
-declare class LoggerConnectionSet extends AdvancedSet<LoggerConnection> {
-}
-declare class SpaceMap extends AdvancedMap<Space, LoggerConnectionSet> {
-}
-declare class LoggerConnection extends Connection {
-    space?: Space;
-    type?: ConnectionType;
-}
-type AsyncGuardResponse = Promise<{
-    success: true;
-    message?: string;
-} | {
-    success: false;
-    message: string;
-}>;
-type GuardResponse = {
-    success: true;
-    message?: string;
-} | {
-    success: false;
-    message: string;
-};
-export interface Guard {
-    verifyServerConnection?(connection: Connection): AsyncGuardResponse | GuardResponse;
-    verifyServerSubscription?(connection: Connection, data: any): AsyncGuardResponse | GuardResponse;
-    verifyClusterConnection?(connection: Connection): AsyncGuardResponse | GuardResponse;
-}
 export declare class LoggerCluster extends Cluster<any, SpaceMap> {
     private guard;
     private readonly adminReader;
-    constructor(clusterInfo: any, serversInfo: any[] | undefined, { openOnStart }: {
+    constructor(clusterInfo: IsServerInfo | undefined, serversInfo: IsServerInfo[] | undefined, { openOnStart }: {
         openOnStart?: boolean;
     }, guard?: Guard);
     open(srv: number | IsHttpServer | IsServerInfo): this;
@@ -64,5 +36,4 @@ export declare class LoggerCluster extends Cluster<any, SpaceMap> {
     searchServerToUse(space: Space): Server;
     addSpaceToServer(server: Server, space: Space): LoggerConnectionSet;
 }
-export {};
 //# sourceMappingURL=cluster.socket.io.d.ts.map

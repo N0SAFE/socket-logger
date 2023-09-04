@@ -1,11 +1,12 @@
 {
     "name": "@n0safe/logger",
-    "version": "1.0.10",
+    "version": "1.0.11",
     "description": "",
     "publishConfig": {
         "access": "public"
     },
     "main": "dist/index.js",
+    "types": "dist/types.d.ts",
     "directories": {
         "test": "tests"
     },

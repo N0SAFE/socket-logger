@@ -28,12 +28,12 @@ export default class Cluster<GlobalStore, ServerStore> extends Server {
   }
   
   constructor(
-    private readonly clusterInfo: IsServerInfo = { port: 65000, path: '/' },
-    private readonly serversInfo: IsServerInfo[] = [{ port: 65001, path: '/' }],
+    private readonly clusterInfo: IsServerInfo = { port: 65000, path: '/', serverOptions: {} },
+    private readonly serversInfo: IsServerInfo[] = [{ port: 65001, path: '/', serverOptions: {} }],
     opts = { openOnStart: true },
     private readonly store = {} as GlobalStore,
   ) {
-    super({ path: clusterInfo.path })
+    super({ path: clusterInfo.path as string, serverOptions: clusterInfo.serverOptions })
     if(opts.openOnStart) {
       this.open(this.clusterInfo)
     }
@@ -201,7 +201,7 @@ export default class Cluster<GlobalStore, ServerStore> extends Server {
     } else if (this.serverExists(serverInfo)) {
       return this.findServerByPort(serverInfo).key
     }
-    const server = new Server(this.getHttpServer(serverInfo), serverInfo)
+    const server = new Server(this.getHttpServer(serverInfo), { path: serverInfo.path as string, serverOptions: serverInfo.serverOptions })
     this.servers.set(server, store)
     callback?.({ server, store })
     return server

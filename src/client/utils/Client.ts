@@ -4,17 +4,6 @@ import { AdvancedSocketMethods } from '../../utils/types'
 import clc from 'cli-color'
 import type { IsInfo } from './types'
 
-export interface IsAutorestartBehavior {
-  restartOnDisconnect?: {
-    active?: boolean
-    timeout?: number
-  }
-  restartOnError?: {
-    active?: boolean
-    timeout?: number
-  }
-}
-
 export default class Client implements AdvancedSocketMethods {
   private socket?: Socket
   private readonly events: EventEmitter = new EventEmitter()

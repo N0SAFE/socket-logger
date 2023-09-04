@@ -1,7 +1,8 @@
 /// <reference types="node" />
 import { ChildProcessWithoutNullStreams } from 'child_process';
-import LoggerWriterClient, { WriterGuard } from './writer.socker.io';
-import LoggerReaderClient, { ReaderGuard } from './reader.socket.io';
+import type { ReaderGuard, WriterGuard } from './types';
+import LoggerWriterClient from './writer.socker.io';
+import LoggerReaderClient from './reader.socket.io';
 export declare function createAdminReader(): undefined;
 export declare function createReader({ port, host, protocol, path, space, keepAlive, timeout, }: {
     port?: number | undefined;

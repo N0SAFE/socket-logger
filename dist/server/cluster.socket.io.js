@@ -7,23 +7,16 @@ exports.LoggerCluster = exports.log = void 0;
 const utils_1 = require("../utils");
 const utils_2 = require("./utils");
 const cli_color_1 = __importDefault(require("cli-color"));
+const _1 = require(".");
 const log = (message, ...args) => {
     console.log(`[ ${cli_color_1.default.yellow('SOCKET')} ] ` + message, args);
 };
 exports.log = log;
-const reservedSpaces = ['server'];
-reservedSpaces;
-class LoggerConnectionSet extends utils_1.AdvancedSet {
-}
-class SpaceMap extends utils_1.AdvancedMap {
-}
-class LoggerConnection extends utils_2.Connection {
-    space;
-    type;
-}
+// const reservedSpaces = ['server']
+// reservedSpaces
 class LoggerCluster extends utils_2.Cluster {
     guard;
-    adminReader = new LoggerConnectionSet();
+    adminReader = new _1.LoggerConnectionSet();
     constructor(clusterInfo = { port: 65000, path: '/' }, serversInfo = [{ port: 65001, path: '/' }], { openOnStart = true }, guard = {}) {
         super(clusterInfo, serversInfo, { openOnStart: false }, {});
         this.guard = guard;
@@ -33,7 +26,7 @@ class LoggerCluster extends utils_2.Cluster {
             guard.verifyServerSubscription || (async () => ({ success: true }));
         guard.verifyClusterConnection =
             guard.verifyClusterConnection || (async () => ({ success: true }));
-        this.createServers(() => new SpaceMap(), ({ server }) => {
+        this.createServers(() => new _1.SpaceMap(), ({ server }) => {
             (0, exports.log)(cli_color_1.default.green('creating server on port ' + server.port + server.p));
             server.onConnection(async (connection) => {
                 const response = (await this.guard.verifyServerConnection?.(connection));
@@ -60,7 +53,7 @@ class LoggerCluster extends utils_2.Cluster {
                     // )
                 }, 10000);
                 // log(clc.yellow('new connection waiting for subscribe'))
-                const loggerConnection = new LoggerConnection(connection.server, connection.socket);
+                const loggerConnection = new _1.LoggerConnection(connection.server, connection.socket);
                 connection.socket.on('subscribe', async (data) => {
                     clearTimeout(timeout);
                     const response = (await this.guard.verifyServerSubscription?.(connection, data));
@@ -153,7 +146,7 @@ class LoggerCluster extends utils_2.Cluster {
             //     'new connection on the cluster waiting for the client to request his server',
             //   ),
             // )
-            const loggerConnection = new LoggerConnection(connection);
+            const loggerConnection = new _1.LoggerConnection(connection);
             const timeout = setTimeout(() => {
                 loggerConnection.socket.disconnect();
                 (0, exports.log)(cli_color_1.default.red('connection timeout on host ' +
@@ -206,7 +199,7 @@ class LoggerCluster extends utils_2.Cluster {
         const spaceMap = this.getSpaceMapByServer(server);
         const loggerConnectionSet = spaceMap.get(space);
         if (!loggerConnectionSet) {
-            return new LoggerConnectionSet();
+            return new _1.LoggerConnectionSet();
         }
         return loggerConnectionSet;
     }

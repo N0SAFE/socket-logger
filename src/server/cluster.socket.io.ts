@@ -1,64 +1,22 @@
-import { AdvancedMap, AdvancedSet } from '../utils'
+import { AdvancedSet } from '../utils'
 import { Connection, Server, Cluster } from './utils'
 import clc from 'cli-color'
 import type { IsHttpServer, IsServerInfo } from './utils/types'
+import type { Space, ConnectionType,  GuardResponse, Guard } from './types'
+import { LoggerConnectionSet, SpaceMap, LoggerConnection } from '.'
 
 export const log = (message: string, ...args: any[]) => {
   console.log(`[ ${clc.yellow('SOCKET')} ] ` + message, args)
 }
 
-const reservedSpaces = ['server']
-reservedSpaces
-
-type Space = string
-type ConnectionType = 'writer' | 'reader' | 'admin'
-
-class LoggerConnectionSet extends AdvancedSet<LoggerConnection> {}
-class SpaceMap extends AdvancedMap<Space, LoggerConnectionSet> {}
-class LoggerConnection extends Connection {
-  public space?: Space
-  public type?: ConnectionType
-}
-
-type AsyncGuardResponse = Promise<
-  | {
-      success: true
-      message?: string
-    }
-  | {
-      success: false
-      message: string
-    }
->
-
-type GuardResponse =
-  | {
-      success: true
-      message?: string
-    }
-  | {
-      success: false
-      message: string
-    }
-
-export interface Guard {
-  verifyServerConnection?(
-    connection: Connection,
-  ): AsyncGuardResponse | GuardResponse
-  verifyServerSubscription?(
-    connection: Connection,
-    data: any,
-  ): AsyncGuardResponse | GuardResponse
-  verifyClusterConnection?(
-    connection: Connection,
-  ): AsyncGuardResponse | GuardResponse
-}
+// const reservedSpaces = ['server']
+// reservedSpaces
 
 export class LoggerCluster extends Cluster<any, SpaceMap> {
   private readonly adminReader: LoggerConnectionSet = new LoggerConnectionSet()
   constructor(
-    clusterInfo: any = { port: 65000, path: '/' },
-    serversInfo: any[] = [{ port: 65001, path: '/' }],
+    clusterInfo: IsServerInfo = { port: 65000, path: '/' },
+    serversInfo: IsServerInfo[] = [{ port: 65001, path: '/' }],
     { openOnStart = true }: { openOnStart?: boolean },
     private guard: Guard = {},
   ) {

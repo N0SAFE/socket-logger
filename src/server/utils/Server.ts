@@ -1,4 +1,4 @@
-import { Server as _Server } from 'socket.io'
+import { ServerOptions, Server as _Server } from 'socket.io'
 import Connection from './Connection'
 import { AdvancedSocketMethods } from '../../utils/types'
 import type { IsHttpServer } from './types'
@@ -16,7 +16,7 @@ export default class Server extends _Server implements AdvancedSocketMethods {
     })
   }
 
-  constructor(...args: [] | [...any] | [number, ...any]) {
+  constructor(...args: [] | [Partial<ServerOptions> & { serverOptions?: Partial<ServerOptions> | undefined }] | [number | IsHttpServer] | [number | IsHttpServer, Partial<ServerOptions> & { serverOptions?: Partial<ServerOptions> | undefined }]) {
     let _args = args as any[]
     let srv: number | undefined | IsHttpServer
     if (typeof args[0] === 'number' || args[0] instanceof HttpServer) {
@@ -30,6 +30,16 @@ export default class Server extends _Server implements AdvancedSocketMethods {
       _args[0].path?.[0] === '/'
         ? _args[0].path
         : '/' + (typeof _args[0].path === 'string' ? _args[0].path : '')
+    if (_args[0].serverOptions) {
+      _args[0] = { ..._args[0], ..._args[0].serverOptions }
+    }
+    _args[0].cors = _args[0].cors || {
+      origin: '*',
+      methods: ['GET', 'POST'],
+    }
+    _args[0].allowRequest = _args[0].allowRequest || ((_req, _fn) => {
+      _fn(null, true)
+    })
     super(..._args)
     this.p = _args[0].path
     if (srv) {

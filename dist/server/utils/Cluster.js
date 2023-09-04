@@ -29,8 +29,8 @@ class Cluster extends Server_1.default {
             isCluster: true,
         });
     };
-    constructor(clusterInfo = { port: 65000, path: '/' }, serversInfo = [{ port: 65001, path: '/' }], opts = { openOnStart: true }, store = {}) {
-        super({ path: clusterInfo.path });
+    constructor(clusterInfo = { port: 65000, path: '/', serverOptions: {} }, serversInfo = [{ port: 65001, path: '/', serverOptions: {} }], opts = { openOnStart: true }, store = {}) {
+        super({ path: clusterInfo.path, serverOptions: clusterInfo.serverOptions });
         this.clusterInfo = clusterInfo;
         this.serversInfo = serversInfo;
         this.store = store;
@@ -157,7 +157,7 @@ class Cluster extends Server_1.default {
         else if (this.serverExists(serverInfo)) {
             return this.findServerByPort(serverInfo).key;
         }
-        const server = new Server_1.default(this.getHttpServer(serverInfo), serverInfo);
+        const server = new Server_1.default(this.getHttpServer(serverInfo), { path: serverInfo.path, serverOptions: serverInfo.serverOptions });
         this.servers.set(server, store);
         callback?.({ server, store });
         return server;

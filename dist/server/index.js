@@ -14,9 +14,22 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoggerCluster = exports.createServer = exports.createCluster = void 0;
+exports.LoggerCluster = exports.createServer = exports.createCluster = exports.LoggerConnection = exports.SpaceMap = exports.LoggerConnectionSet = void 0;
 const cluster_socket_io_1 = require("./cluster.socket.io");
 Object.defineProperty(exports, "LoggerCluster", { enumerable: true, get: function () { return cluster_socket_io_1.LoggerCluster; } });
+const utils_1 = require("../utils");
+const utils_2 = require("./utils");
+class LoggerConnectionSet extends utils_1.AdvancedSet {
+}
+exports.LoggerConnectionSet = LoggerConnectionSet;
+class SpaceMap extends utils_1.AdvancedMap {
+}
+exports.SpaceMap = SpaceMap;
+class LoggerConnection extends utils_2.Connection {
+    space;
+    type;
+}
+exports.LoggerConnection = LoggerConnection;
 function createCluster(clusterInfo = { port: 65000, path: '/' }, serversInfo = [{ port: 65001, path: '/' }], { openOnStart = true }, guard = {}) {
     return new cluster_socket_io_1.LoggerCluster(clusterInfo, serversInfo, { openOnStart }, guard);
 }

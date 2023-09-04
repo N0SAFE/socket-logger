@@ -1,15 +1,6 @@
 import { Client } from './utils'
 import clc from 'cli-color'
-
-type Payload = {
-  type: 'reader'
-  space: string
-  [key: string]: any
-}
-export interface ReaderGuard {
-  sendRequestPayloadOnClusterConnect?: (payload: Payload) => Payload
-  sendRequestPayloadOnServerConnect?: (payload: Payload) => Payload
-}
+import type { ReaderGuard } from './types'
 
 class LoggerReaderClient extends Client {
   constructor(

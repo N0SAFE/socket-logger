@@ -1,7 +1,8 @@
 import { spawn, ChildProcessWithoutNullStreams } from 'child_process'
 import clc from 'cli-color'
-import LoggerWriterClient, { WriterGuard } from './writer.socker.io'
-import LoggerReaderClient, { ReaderGuard } from './reader.socket.io'
+import type { ReaderGuard, WriterGuard } from './types'
+import LoggerWriterClient from './writer.socker.io'
+import LoggerReaderClient from './reader.socket.io'
 
 export function createAdminReader() {
   return undefined

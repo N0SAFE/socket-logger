@@ -27,12 +27,4 @@ exports.utils = exports.server = exports.client = void 0;
 exports.client = __importStar(require("./client"));
 exports.server = __importStar(require("./server"));
 exports.utils = __importStar(require("./utils"));
-const client = __importStar(require("./client"));
-const server = __importStar(require("./server"));
-const utils = __importStar(require("./utils"));
-console.log({
-    client,
-    server,
-    utils,
-});
 //# sourceMappingURL=index.js.map
