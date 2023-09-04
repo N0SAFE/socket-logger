@@ -17,4 +17,3 @@ export default class AdvancedMap<K, V> extends Map<K, V> {
         value: V;
     } | undefined;
 }
-//# sourceMappingURL=AdvancedMap.d.ts.map

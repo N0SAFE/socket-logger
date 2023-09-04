@@ -9,4 +9,3 @@ declare class LoggerReaderClient extends Client {
     }, guard?: ReaderGuard);
 }
 export default LoggerReaderClient;
-//# sourceMappingURL=reader.socket.io.d.ts.map

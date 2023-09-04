@@ -33,4 +33,3 @@ export default class Client implements AdvancedSocketMethods {
     awaitFor(ev: string, callback?: (...args: any[]) => boolean): Promise<any>;
     request(ev: string, ...args: any[]): Promise<any>;
 }
-//# sourceMappingURL=Client.d.ts.map

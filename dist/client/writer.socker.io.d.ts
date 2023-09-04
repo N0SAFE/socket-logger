@@ -9,4 +9,3 @@ declare class LoggerWriterClient extends Client {
     }, guard: WriterGuard);
 }
 export default LoggerWriterClient;
-//# sourceMappingURL=writer.socker.io.d.ts.map

@@ -7,4 +7,3 @@ export default class AdvancedSet<V> extends Set<V> {
     min(search: (value: V, self: this) => number): V | undefined;
     max(search: (value: V, self: this) => number): V | undefined;
 }
-//# sourceMappingURL=AdvancedSet.d.ts.map

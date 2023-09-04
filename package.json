@@ -1,6 +1,6 @@
 {
     "name": "@n0safe/logger",
-    "version": "1.0.12",
+    "version": "1.0.13",
     "description": "",
     "publishConfig": {
         "access": "public"
@@ -19,7 +19,7 @@
         "dev:cluster": "nodemon npm run serve:cluster",
         "dev:server": "nodemon npm run serve:server",
         "start:dev": "npx nodemon",
-        "build": "tsc --build --clean && tsc",
+        "build": "tsc",
         "watch": "tsc -w",
         "lint": "eslint src --ext .ts",
         "lint:fix": "eslint src --ext .ts --fix",

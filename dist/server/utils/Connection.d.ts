@@ -5,4 +5,3 @@ export default class Connection {
     socket: Socket;
     constructor(...args: [Server, Socket] | [Connection]);
 }
-//# sourceMappingURL=Connection.d.ts.map

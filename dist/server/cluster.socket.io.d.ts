@@ -36,4 +36,3 @@ export declare class LoggerCluster extends Cluster<any, SpaceMap> {
     searchServerToUse(space: Space): Server;
     addSpaceToServer(server: Server, space: Space): LoggerConnectionSet;
 }
-//# sourceMappingURL=cluster.socket.io.d.ts.map
