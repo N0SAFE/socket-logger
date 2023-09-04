@@ -26,5 +26,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.utils = exports.server = exports.client = void 0;
 exports.client = __importStar(require("./client"));
 exports.server = __importStar(require("./server"));
-exports.utils = __importStar(require("./utils"));
+exports.utils = __importStar(require("./shared"));
 //# sourceMappingURL=index.js.map

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { createReader } from '../../client'
+import { createReader } from '@/client'
 import { program, InvalidOptionArgumentError } from 'commander'
 
 function myParseInt(value) {

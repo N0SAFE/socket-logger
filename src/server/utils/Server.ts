@@ -1,9 +1,9 @@
-import { ServerOptions, Server as _Server } from 'socket.io'
+import { Socket, Server as _Server } from 'socket.io'
 import Connection from './Connection'
-import { AdvancedSocketMethods } from '../../utils/types'
-import type { IsHttpServer } from './types'
+import { AdvancedSocketMethods } from '@/shared/types'
+import type { IsHttpServer, IsServerInfo, ServerOptions } from './types'
 import { Server as HttpServer, createServer } from 'http'
-import Client from '../../client/utils/Client'
+import Client from '@/client/utils/Client'
 
 export default class Server extends _Server implements AdvancedSocketMethods {
   public port: number | undefined
@@ -16,7 +16,7 @@ export default class Server extends _Server implements AdvancedSocketMethods {
     })
   }
 
-  constructor(...args: [] | [Partial<ServerOptions> & { serverOptions?: Partial<ServerOptions> | undefined }] | [number | IsHttpServer] | [number | IsHttpServer, Partial<ServerOptions> & { serverOptions?: Partial<ServerOptions> | undefined }]) {
+  constructor(...args: [] | [Partial<IsServerInfo>] | [number | IsHttpServer] | [number | IsHttpServer, Partial<IsServerInfo>]) {
     let _args = args as any[]
     let srv: number | undefined | IsHttpServer
     if (typeof args[0] === 'number' || args[0] instanceof HttpServer) {
@@ -26,27 +26,28 @@ export default class Server extends _Server implements AdvancedSocketMethods {
     if (_args.length === 0) {
       _args = [{}]
     }
-    _args[0].path =
-      _args[0].path?.[0] === '/'
-        ? _args[0].path
-        : '/' + (typeof _args[0].path === 'string' ? _args[0].path : '')
     if (_args[0].serverOptions) {
       _args[0] = { ..._args[0], ..._args[0].serverOptions }
     }
-    _args[0].cors = _args[0].cors || {
+    let opts = _args[0] as Partial<ServerOptions>
+    opts.path =
+      opts.path?.[0] === '/'
+        ? opts.path
+        : '/' + (typeof opts.path === 'string' ? opts.path : '')
+    opts.cors = opts.cors || {
       origin: '*',
       methods: ['GET', 'POST'],
-    }
-    _args[0].allowRequest = _args[0].allowRequest || ((_req, _fn) => {
+    } 
+    opts.allowRequest = opts.allowRequest || ((_req, _fn) => {
       _fn(null, true)
     })
-    super(..._args)
-    this.p = _args[0].path
+    super(opts)
+    this.p = opts.path
     if (srv) {
       this.open(srv)
     }
 
-    this.on('connection', (socket) => {
+    this.on('connection', (socket: Socket) => {
       const connection = new Connection(this, socket)
       this.connections.add(connection)
       this.onConnectionFn(connection)
@@ -57,7 +58,7 @@ export default class Server extends _Server implements AdvancedSocketMethods {
   }
 
   public onConnection(callback: (connection: Connection) => any) {
-    this.on('connection', (socket) => {
+    this.on('connection', (socket: Socket) => {
       const connection = this.findConnection(
         (c) => c.socket === socket,
       ) as unknown as Connection

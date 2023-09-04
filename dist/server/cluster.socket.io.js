@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoggerCluster = exports.log = void 0;
-const utils_1 = require("../utils");
-const utils_2 = require("./utils");
+const shared_1 = require("@/shared");
+const utils_1 = require("./utils");
 const cli_color_1 = __importDefault(require("cli-color"));
 const _1 = require(".");
 const log = (message, ...args) => {
@@ -14,7 +14,7 @@ const log = (message, ...args) => {
 exports.log = log;
 // const reservedSpaces = ['server']
 // reservedSpaces
-class LoggerCluster extends utils_2.Cluster {
+class LoggerCluster extends utils_1.Cluster {
     guard;
     adminReader = new _1.LoggerConnectionSet();
     constructor(clusterInfo = { port: 65000, path: '/' }, serversInfo = [{ port: 65001, path: '/' }], { openOnStart = true }, guard = {}) {
@@ -76,6 +76,7 @@ class LoggerCluster extends utils_2.Cluster {
                     const { space, type } = data;
                     loggerConnection.space = space;
                     loggerConnection.type = type;
+                    console.log('check: ' + (connection.server === server));
                     if (type === 'writer') {
                         // log(clc.green('new writer connected on space ' + space))
                         const loggerConnectionSet = this.addSpaceToServer(server, space);
@@ -159,14 +160,14 @@ class LoggerCluster extends utils_2.Cluster {
                     const { space } = data;
                     loggerConnection.space = space;
                     const server = this.searchServerToUse(space);
-                    // log(clc.green('new connection redirected to ' + server.port))
+                    (0, exports.log)(cli_color_1.default.green('new connection redirected to ' + server.p + ":" + server.port));
                     this.redirect(loggerConnection.server, server);
                     // log(
                     //   clc.yellow(
                     //     'waiting for connection on ' + server.port + server.p,
                     //   ),
                     // )
-                    resolve({ port: server.port, space });
+                    resolve(server);
                 });
             });
             return promise;
@@ -448,11 +449,16 @@ class LoggerCluster extends utils_2.Cluster {
                 });
             });
             (0, exports.log)(cli_color_1.default.green('adding space ' + space + ' to server ' + server.port));
-            this.servers.get(server)?.set(space, new utils_1.AdvancedSet());
+            this.servers.get(server)?.set(space, new shared_1.AdvancedSet());
         }
         const connection = this.servers.get(server)?.get(space);
+        console.log(space);
+        console.log(this.IsSpaceExists(space));
+        console.log("server : " + !!server ? `port: ${server.port} | path: ${server.p}` : 'server not found');
+        console.log(this.servers.get(server));
+        console.log(this.servers.get(server)?.get(space));
         if (!connection) {
-            throw new Error('connection not found');
+            throw new Error('connection not found'); // ! if this error occure, it can means that the client as not been redirected to the right server
         }
         return connection;
     }

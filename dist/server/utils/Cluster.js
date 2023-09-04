@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Server_1 = __importDefault(require("./Server"));
-const utils_1 = require("../../utils");
+const shared_1 = require("@/shared");
 const http_1 = require("http");
 function dummyFunction(...args) {
     args;
@@ -14,15 +14,15 @@ class Cluster extends Server_1.default {
     serversInfo;
     store;
     servers;
-    httpServerMap = new utils_1.AdvancedMap();
+    httpServerMap = new shared_1.AdvancedMap();
     isOpened = false;
-    redirectFn = (connection) => {
+    redirectFn = () => {
         // search the server with the lowest number of connections
         const server = this.servers.min((s) => s.connections.size);
         if (!server) {
             throw new Error('no server found');
         }
-        this.redirect(connection.server, server.key);
+        return server.key;
     };
     onConnectionFn = () => {
         this.emit('connection', {
@@ -37,11 +37,17 @@ class Cluster extends Server_1.default {
         if (opts.openOnStart) {
             this.open(this.clusterInfo);
         }
-        this.servers = new utils_1.AdvancedMap();
+        this.servers = new shared_1.AdvancedMap();
         this.emit('beforeCreateServers');
         dummyFunction(this.store); // this function is called to avoid error on the ts parser for the unused variable store
-        super.onConnection((connection) => {
-            this.redirectFn(connection);
+        super.onConnection(async (connection) => {
+            const serverToRedirect = await this.redirectFn(connection);
+            if (!serverToRedirect) {
+                console.error('no server found');
+            }
+            else {
+                this.redirect(connection.server, serverToRedirect);
+            }
         });
     }
     setRedirectFn(callback) {

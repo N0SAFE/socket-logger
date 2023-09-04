@@ -1,4 +1,4 @@
-import AdvancedSet from '../../utils/AdvancedSet'
+import AdvancedSet from '../../shared/AdvancedSet'
 import { expect } from 'chai'
 
 describe('AdvancedSet', () => {

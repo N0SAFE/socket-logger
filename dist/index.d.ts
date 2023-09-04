@@ -1,4 +1,4 @@
 export * as client from './client';
 export * as server from './server';
-export * as utils from './utils';
+export * as utils from './shared';
 //# sourceMappingURL=index.d.ts.map

@@ -1,4 +1,4 @@
-import { AdvancedSet } from '../utils'
+import { AdvancedSet } from '@/shared'
 import { Connection, Server, Cluster } from './utils'
 import clc from 'cli-color'
 import type { IsHttpServer, IsServerInfo } from './utils/types'
@@ -103,6 +103,8 @@ export class LoggerCluster extends Cluster<any, SpaceMap> {
               loggerConnection.space = space
               loggerConnection.type = type
 
+              console.log('check: ' + (connection.server === server))
+
               if (type === 'writer') {
                 // log(clc.green('new writer connected on space ' + space))
 
@@ -200,14 +202,14 @@ export class LoggerCluster extends Cluster<any, SpaceMap> {
         )
       }, 10000)
 
-      const promise = new Promise((resolve) => {
+      const promise = new Promise<Server>((resolve) => {
         loggerConnection.socket.on('request', (data: { space: Space }) => {
           clearTimeout(timeout)
           const { space } = data
           loggerConnection.space = space
           const server = this.searchServerToUse(space)
 
-          // log(clc.green('new connection redirected to ' + server.port))
+          log(clc.green('new connection redirected to ' + server.p + ":" + server.port))
           this.redirect(loggerConnection.server, server)
           // log(
           //   clc.yellow(
@@ -215,7 +217,7 @@ export class LoggerCluster extends Cluster<any, SpaceMap> {
           //   ),
           // )
 
-          resolve({ port: server.port, space })
+          resolve(server)
         })
       })
 
@@ -571,8 +573,13 @@ export class LoggerCluster extends Cluster<any, SpaceMap> {
       this.servers.get(server)?.set(space, new AdvancedSet())
     }
     const connection = this.servers.get(server)?.get(space)
+    console.log(space)
+    console.log(this.IsSpaceExists(space))
+    console.log("server : " + !!server ? `port: ${server.port} | path: ${server.p}` : 'server not found')
+    console.log(this.servers.get(server))
+    console.log(this.servers.get(server)?.get(space))
     if (!connection) {
-      throw new Error('connection not found')
+      throw new Error('connection not found') // ! if this error occure, it can means that the client as not been redirected to the right server
     }
     return connection
   }

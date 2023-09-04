@@ -1,6 +1,6 @@
 import { default as io, Socket } from 'socket.io-client'
 import { EventEmitter } from 'events'
-import { AdvancedSocketMethods } from '../../utils/types'
+import { AdvancedSocketMethods } from '@/shared/types'
 import clc from 'cli-color'
 import type { IsInfo } from './types'
 

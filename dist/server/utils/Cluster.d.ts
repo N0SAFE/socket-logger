@@ -1,6 +1,7 @@
 import Server from './Server';
 import Connection from './Connection';
-import { AdvancedMap } from '../../utils';
+import { AdvancedMap } from '@/shared';
+import { Promisable, Undefinedable } from '@/shared/types';
 import type { IsHttpServer, IsServerInfo } from './types';
 export default class Cluster<GlobalStore, ServerStore> extends Server {
     private readonly clusterInfo;
@@ -14,7 +15,7 @@ export default class Cluster<GlobalStore, ServerStore> extends Server {
     constructor(clusterInfo?: IsServerInfo, serversInfo?: IsServerInfo[], opts?: {
         openOnStart: boolean;
     }, store?: GlobalStore);
-    setRedirectFn(callback: (connection: any) => void): void;
+    setRedirectFn(callback: (connection: any) => Undefinedable<Promisable<Undefinedable<Server>>>): void;
     open(serverInfo: number | IsHttpServer | IsServerInfo): this;
     close(): this;
     serverExists(serverInfo: IsServerInfo): boolean;

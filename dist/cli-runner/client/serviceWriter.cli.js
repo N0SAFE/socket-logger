@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const commander_1 = require("commander");
-const index_1 = require("../../client/index");
+const index_1 = require("@/client/index");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 function myParseInt(value) {

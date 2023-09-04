@@ -1,4 +1,4 @@
-import AdvancedMap from '../../utils/AdvancedMap'
+import AdvancedMap from '../../shared/AdvancedMap'
 import { expect } from 'chai'
 
 describe('AdvancedMap', () => {

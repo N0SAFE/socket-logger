@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const server_1 = require("../../server");
+const server_1 = require("@/server");
 const commander_1 = require("commander");
 function myParseInt(value) {
     // parseInt takes a string and a radix

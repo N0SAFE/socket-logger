@@ -17,15 +17,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoggerCluster = exports.createServer = exports.createCluster = exports.LoggerConnection = exports.SpaceMap = exports.LoggerConnectionSet = void 0;
 const cluster_socket_io_1 = require("./cluster.socket.io");
 Object.defineProperty(exports, "LoggerCluster", { enumerable: true, get: function () { return cluster_socket_io_1.LoggerCluster; } });
-const utils_1 = require("../utils");
-const utils_2 = require("./utils");
-class LoggerConnectionSet extends utils_1.AdvancedSet {
+const shared_1 = require("@/shared");
+const utils_1 = require("./utils");
+class LoggerConnectionSet extends shared_1.AdvancedSet {
 }
 exports.LoggerConnectionSet = LoggerConnectionSet;
-class SpaceMap extends utils_1.AdvancedMap {
+class SpaceMap extends shared_1.AdvancedMap {
 }
 exports.SpaceMap = SpaceMap;
-class LoggerConnection extends utils_2.Connection {
+class LoggerConnection extends utils_1.Connection {
     space;
     type;
 }

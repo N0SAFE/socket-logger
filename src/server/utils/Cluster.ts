@@ -1,7 +1,7 @@
 import Server from './Server'
-// import { Server as _Server } from 'socket.io'
 import Connection from './Connection'
-import { AdvancedMap } from '../../utils'
+import { AdvancedMap } from '@/shared'
+import { Promisable, Undefinedable } from '@/shared/types'
 import type { IsHttpServer, IsServerInfo } from './types'
 import { Server as HttpServer } from 'http'
 
@@ -13,27 +13,27 @@ export default class Cluster<GlobalStore, ServerStore> extends Server {
   public servers: AdvancedMap<Server, ServerStore>
   public httpServerMap: AdvancedMap<number, IsHttpServer> = new AdvancedMap()
   public isOpened = false
-  private redirectFn: (connection: Connection) => void = (connection) => {
+  private redirectFn: (connection: Connection) => Undefinedable<Promisable<Undefinedable<Server>>> = () => {
     // search the server with the lowest number of connections
     const server = this.servers.min((s) => s.connections.size)
     if (!server) {
       throw new Error('no server found')
     }
-    this.redirect(connection.server, server.key)
+    return server.key
   }
   protected onConnectionFn: (connection: Connection) => void = () => {
     this.emit('connection', {
       isCluster: true,
     })
   }
-  
+
   constructor(
     private readonly clusterInfo: IsServerInfo = { port: 65000, path: '/', serverOptions: {} },
     private readonly serversInfo: IsServerInfo[] = [{ port: 65001, path: '/', serverOptions: {} }],
     opts = { openOnStart: true },
     private readonly store = {} as GlobalStore,
   ) {
-    super({ path: clusterInfo.path as string, serverOptions: clusterInfo.serverOptions })
+    super({ path: clusterInfo.path, serverOptions: clusterInfo.serverOptions })
     if(opts.openOnStart) {
       this.open(this.clusterInfo)
     }
@@ -42,12 +42,17 @@ export default class Cluster<GlobalStore, ServerStore> extends Server {
     this.emit('beforeCreateServers')
     dummyFunction(this.store) // this function is called to avoid error on the ts parser for the unused variable store
 
-    super.onConnection((connection: Connection) => {
-      this.redirectFn(connection)
+    super.onConnection(async (connection: Connection) => {
+      const serverToRedirect = await this.redirectFn(connection)
+      if (!serverToRedirect) {
+        console.error('no server found')
+      } else {
+        this.redirect(connection.server, serverToRedirect)
+      }
     })
   }
 
-  setRedirectFn(callback: (connection) => void) {
+  setRedirectFn(callback: (connection) => Undefinedable<Promisable<Undefinedable<Server>>>) {
     this.redirectFn = callback
   }
 
@@ -201,7 +206,7 @@ export default class Cluster<GlobalStore, ServerStore> extends Server {
     } else if (this.serverExists(serverInfo)) {
       return this.findServerByPort(serverInfo).key
     }
-    const server = new Server(this.getHttpServer(serverInfo), { path: serverInfo.path as string, serverOptions: serverInfo.serverOptions })
+    const server = new Server(this.getHttpServer(serverInfo), { path: serverInfo.path, serverOptions: serverInfo.serverOptions })
     this.servers.set(server, store)
     callback?.({ server, store })
     return server

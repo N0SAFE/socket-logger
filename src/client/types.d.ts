@@ -17,4 +17,4 @@ export interface WriterGuard {
     sendRequestPayloadOnServerConnect?: (payload: WriterPayload) => WriterPayload
   }
 
-export type * as utils from './utils'
+export * as utils from './utils'

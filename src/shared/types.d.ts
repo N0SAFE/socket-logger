@@ -10,3 +10,6 @@ export interface AdvancedSocketMethods {
     `Promise` that resolves with the response from the server. */
   request(ev: string, ...args: any[]): Promise<any>
 }
+
+export type Promisable<T> = T | Promise<T>
+export type Undefinedable<T> = T | undefined

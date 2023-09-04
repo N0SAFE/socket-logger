@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const socket_io_1 = require("socket.io");
 const Connection_1 = __importDefault(require("./Connection"));
 const http_1 = require("http");
-const Client_1 = __importDefault(require("../../client/utils/Client"));
+const Client_1 = __importDefault(require("@/client/utils/Client"));
 class Server extends socket_io_1.Server {
     port;
     connections = new Set();
@@ -27,22 +27,23 @@ class Server extends socket_io_1.Server {
         if (_args.length === 0) {
             _args = [{}];
         }
-        _args[0].path =
-            _args[0].path?.[0] === '/'
-                ? _args[0].path
-                : '/' + (typeof _args[0].path === 'string' ? _args[0].path : '');
         if (_args[0].serverOptions) {
             _args[0] = { ..._args[0], ..._args[0].serverOptions };
         }
-        _args[0].cors = _args[0].cors || {
+        let opts = _args[0];
+        opts.path =
+            opts.path?.[0] === '/'
+                ? opts.path
+                : '/' + (typeof opts.path === 'string' ? opts.path : '');
+        opts.cors = opts.cors || {
             origin: '*',
             methods: ['GET', 'POST'],
         };
-        _args[0].allowRequest = _args[0].allowRequest || ((_req, _fn) => {
+        opts.allowRequest = opts.allowRequest || ((_req, _fn) => {
             _fn(null, true);
         });
-        super(..._args);
-        this.p = _args[0].path;
+        super(opts);
+        this.p = opts.path;
         if (srv) {
             this.open(srv);
         }

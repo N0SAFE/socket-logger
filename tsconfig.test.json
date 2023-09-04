@@ -1,0 +1,17 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "noEmit": true,
+    },
+    "include": [
+        "__tests__", // your test file
+    ],
+    "paths": {
+        "@/*": [
+            "src/*"
+        ],
+        "@@/*": [
+            "src/__tests__/*"
+        ]
+    }
+}

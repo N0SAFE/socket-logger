@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { program, InvalidOptionArgumentError } from 'commander'
-import { createWriter } from '../../client/index'
+import { createWriter } from '@/client/index'
 
 function myParseInt(value: any): number {
   // parseInt takes a string and a radix
