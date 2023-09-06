@@ -28,20 +28,20 @@
     "experimentalDecorators": true,
     "paths": {
       "@/*": [
-        "src/*"
+        "./src/*"
       ],
       "@@/*": [
-        "src/__tests__/*"
+        "./src/__tests__/*"
       ]
     }
   },
   "include": [
-    "src/**/*",
+    "./src/**/*",
   ],
   "exclude": [
-    "src/**/*.spec.ts",
-    "dist/**/*",
-    ".eslintrc.js",
-    "src/__tests__/**/*",
+    "./src/**/*.spec.ts",
+    "./dist/**/*",
+    "./.eslintrc.js",
+    "./src/__tests__/**/*",
   ],
 }
